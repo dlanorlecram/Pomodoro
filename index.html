@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8"/>
+    <meta name="description" content="">
+    <meta name="author" content="Ronald MARCEL">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pomodoro.app</title>
+    <link rel="stylesheet" href="asset/css/style.css">
+    <link rel="stylesheet" href="./node_modules/materialize-css/dist/css/materialize.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <noscript>Vous devez activer javascript pour utiliser l'application.</noscript>
+  </head>
+  <body>
+    <header>
+      <a href="" class="white-text">Pomodoro app</a>
+    </header>
+    <div class="big-wrapper cyan darken-1 white-text">
+      <div class="container-timer">
+        <div class="display-timer">
+          <span class="show-timer--minute">00</span>
+          <span class="colon">:</span>
+          <span class="show-timer--second">00</span>
+          <div class="">
+            <button type="button" name="button" data-role="start" class="button-timer btn-no-style">
+              <i class="material-icons">play_arrow</i>
+            </button>
+            <button type="button" name="button" data-role="stop" class="button-timer btn-no-style">
+              <i class="material-icons">stop</i>
+            </button>
+            <button type="button" name="button" data-role="reset" class="button-timer btn-no-style">
+              <i class="material-icons">refresh</i>
+            </button>
+          </div>
+        </div>
+        <p>TÂCHE EN COURS:</p>
+        <p class='show-current-task center-align'></p>
+      </div>
+    </div>
+    <div class="small-wrapper">
+      <div class="row">
+        <form class="col s12" name="set_task">
+          <div class="row">
+            <div class="input-field col s9">
+              <input type="text" id="task_name" name="task_name" value="">
+              <label class="" for="task_name">Saisissez une tâche.</label>
+            </div>
+            <div class="input-field col s3">
+              <select name="task_minute" class="center-align">
+                <option value="15">15 min</option>
+                <option value="20">20 min</option>
+                <option value="25">25 min</option>
+                <option value="30">30 min</option>
+                <option value="35">35 min</option>
+                <option value="40">40 min</option>
+                <option value="45">45 min</option>
+                <option value="50">50 min</option>
+                <option value="55">55 min</option>
+                <option value="60">60 min</option>
+              </select>
+            </div>
+            <div class="col s12 center-align">
+              <button class="btn waves-effect waves-light cyan darken-1" type="submit" name="action">
+                Ajouter
+              </button>
+            </div>
+          </div>
+        </form>
+        <div class="col s12">
+          <div class="row">
+            <div class="col s12">
+              <h3 class="">LISTE DE TÂCHES:</h3>
+              <ul id="task_group" title="Tasks">
+                <!-- <li>
+                  <span>Implémentation de la page d’accueil.</span>
+                  <span>20min</span>
+                </li>
+                <li>
+                  <span>Implémentation de la page d’accueil.</span>
+                  <span>20min</span>
+                </li>
+              </ul> -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="asset/js/pomodoro.js" charset="utf-8"></script>
+    <script src="./node_modules/jquery/dist/jquery.min.js" charset="utf-8"></script>
+    <script src="./node_modules/materialize-css/dist/js/materialize.min.js" charset="utf-8"></script>
+    <script src="asset/js/script.js" charset="utf-8"></script>
+  </body>
+</html>

@@ -1,0 +1,148 @@
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+header {
+  position: fixed;
+  padding-left: 35px;
+  padding-top: 20px;
+  width: 100%;
+  z-index: 1;
+}
+
+.big-wrapper {
+  height: 59.5vh;
+  position: relative;
+}
+
+.big-wrapper > div {
+  position: absolute;
+  top: 55%;
+  left: 50%;
+  max-width: 430px;
+  transform: translate(-50%, -50%);
+}
+
+.small-wrapper {
+  height: 40.5vh;
+  background-color: #fff;
+}
+
+.display-timer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 60px;
+}
+
+.display-timer > span{
+  font-size: 144px;
+}
+
+.show-timer--minute,
+.show-timer--second {
+  position: relative;
+}
+
+.show-timer--minute::after,
+.show-timer--second::after {
+  bottom: 0px;
+  font-size: 18px;
+  font-weight: 200;
+  left: 50%;
+  position: absolute;
+  transform: translate(-50%, -50%);
+}
+
+.show-timer--minute::after {
+  content: 'mins'
+}
+
+.show-timer--second::after {
+  content: 'secs'
+}
+
+.container-timer > p:first-of-type {
+  font-size: 12px;
+  margin: 0 0 10px;
+}
+
+.container-timer > p:nth-of-type(0n+2) {
+  font-size: 30px;
+  font-weight: 400;
+  margin: 0;
+  min-height: 90px;
+}
+
+.small-wrapper h3 {
+  color: #4A4A4A;
+  margin: 26px 0 0;
+  font-size: 13px;
+  font-weight: bold;
+}
+
+.small-wrapper > div {
+    max-width: 576px;
+    margin: 0 auto;
+}
+
+.small-wrapper {
+  padding-top: 40px;
+}
+
+.small-wrapper ul>li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: #4A4A4A;
+  padding: 19px 15px;
+}
+
+.small-wrapper ul>li:not(:last-child) {
+  border-bottom: 1px solid #E9E9E9;
+}
+
+.small-wrapper ul>li> span:first-child {
+  font-size: 18px;
+  font-weight: 300;
+}
+
+.small-wrapper ul>li> span:nth-child(0n+2) {
+  font-size: 13px;
+  font-weight: bold;
+}
+
+.colon {
+  padding: 0 10px;
+}
+
+.btn-no-style {
+  padding: 0;
+  background: transparent;
+  border: none;
+  line-height: 0;
+}
+
+.btn-no-style:focus {
+  background: transparent;
+}
+
+.btn-no-style:nth-child(0n+2) {
+  margin: 0 10px;
+}
+
+.item-task.active,
+.item-task:hover{
+  background-color: #eceff1 ;
+}
+.item-task.active,
+.item-task:hover > span{
+  color: #4A4A4A;
+}
