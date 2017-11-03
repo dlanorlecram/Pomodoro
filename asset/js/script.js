@@ -1,5 +1,5 @@
-
 $(document).ready(function() {
    $('select').material_select();
  });
- var appPomodoro = new Pomodoro('set_task', '#task_group');
+
+var appPomodoro = new Pomodoro('set_task', '#task_group');

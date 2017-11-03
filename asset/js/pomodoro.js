@@ -3,9 +3,9 @@
 function Pomodoro(formName, block) {
 
   var started = false,
-      tasks = [],
-      currentTaskName = '',
-      reset;
+    tasks = [],
+    currentTaskName = '',
+    reset;
 
   this.getStarted = function() {
     return started;
@@ -26,18 +26,75 @@ function Pomodoro(formName, block) {
   this.getReset = function() {
     return reset;
   }
-  this.setReset = function(number){
+
+  this.setReset = function(number) {
     reset = number;
   }
 
-  this.getCurrentTaskName = function(name){
+  this.getCurrentTaskName = function(name) {
     return currentTaskName;
   }
 
-  this.setCurrentTaskName = function(name){
+  this.setCurrentTaskName = function(name) {
     currentTaskName = name;
   }
 
+  this.tagEvent = function(tag) {
+    tag.addEventListener('click', function(e) {
+      _this.getTask(this)
+      _this.parseTag('.item-task', this)
+    })
+  }
+  /**
+   * Générateur de tag <li></li> pour une tâche
+   **/
+
+  this.newTagLi = function(obj) {
+   let li      = document.createElement('li'),
+     spanName  = document.createElement('span'),
+     spanTime  = document.createElement('span');
+
+   spanName.textContent = obj.taskName;
+   spanTime.textContent = `${obj.taskTime}min`;
+   const children = [spanName, spanTime];
+
+   for (let i = 0; i < children.length; i++) {
+     li.appendChild(children[i])
+   }
+
+   this.setAttributes(li, {
+     'data-title': obj.taskName,
+     'data-timer': obj.taskTime,
+     'class': 'item-task'
+   });
+   this.tagEvent(li)
+   return li;
+  }
+
+  /**
+   * Section de récupération des données stockées.
+   **/
+
+  this.getTasksStorage = function() {
+    if(localStorage.getItem('pomodoroApp') === null)
+      return;
+    tasks = JSON.parse(localStorage.getItem('pomodoroApp'));
+    for(let key in tasks){
+      this.ul.appendChild(this.newTagLi(tasks[key]))
+    }
+  }
+
+  this.setTasksStorage = function() {
+    localStorage.setItem('pomodoroApp', JSON.stringify(tasks));
+  }
+
+  this.removeTasksStorage = function() {
+    localStorage.removeItem('pomodoroApp');
+  }
+
+  /**
+  *
+  **/
   this.$timer;
   this.showTimerMinute = document.querySelector('.show-timer--minute');
   this.showTimerSecond = document.querySelector('.show-timer--second');
@@ -55,19 +112,24 @@ function Pomodoro(formName, block) {
 
   this.parseTag = (className, el) => {
     let tagNodes = document.querySelectorAll(className)
-    tagNodes.forEach((elNode)=>{
-      if(elNode===el){
+    tagNodes.forEach((elNode) => {
+      if (elNode === el) {
         elNode.classList.add('active')
-      }else{
+      } else {
         elNode.classList.remove('active')
       }
     })
   }
   this.InitEvents();
   this.btnListener();
+
+  var _this = this
+  window.onload = function(){
+    _this.getTasksStorage();
+  }
 }
 
-Pomodoro.prototype.updateDom = function(){
+Pomodoro.prototype.updateDom = function() {
   this.showTimerMinute.innerHTML = this.parseNumber(this.minute);
   this.showTimerSecond.innerHTML = this.parseNumber(this.second);
   this.showTaskTitle.innerHTML = this.getCurrentTaskName()
@@ -101,11 +163,7 @@ Pomodoro.prototype.setTask = function(entries) {
     'class': 'item-task'
   });
 
-  li.addEventListener('click', function(e) {
-    _this.getTask(this)
-    console.log();
-    _this.parseTag('.item-task',this)
-  })
+  this.tagEvent(li)
 
   spanName.textContent = obj.taskName
   spanTime.textContent = `${obj.taskTime}min`;
@@ -117,13 +175,17 @@ Pomodoro.prototype.setTask = function(entries) {
 
   this.ul.appendChild(li)
   this.setTasks(obj);
-  console.log(this.getTasks())
+  /**
+   *  Actualisation de la table
+   **/
+
+  this.setTasksStorage();
 }
 
 Pomodoro.prototype.getTask = function(el) {
   if (!this.getStarted())
     this.second = 0;
-    this.minute = el.dataset.timer;
+  this.minute = el.dataset.timer;
   this.setReset(this.minute);
   this.setCurrentTaskName(el.dataset.title)
   this.updateDom();
@@ -174,13 +236,13 @@ Pomodoro.prototype.start = function() {
 }
 
 Pomodoro.prototype.stop = function() {
-  if(this.getStarted())
+  if (this.getStarted())
     this.setStarted(false);
   clearInterval(this.init);
 }
 
 Pomodoro.prototype.reset = function() {
-  if(this.getStarted())
+  if (this.getStarted())
     this.setStarted(false);
 
   clearInterval(this.init);
