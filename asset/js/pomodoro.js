@@ -19,8 +19,8 @@ function Pomodoro(formName, block) {
     return tasks;
   }
 
-  this.setTasks = function(newelt) {
-    tasks.push(newelt)
+  this.setTasks = function(newElt) {
+    tasks.push(newElt)
   }
 
   this.getReset = function() {
@@ -35,14 +35,16 @@ function Pomodoro(formName, block) {
     return currentTaskName;
   }
 
+
   this.setCurrentTaskName = function(name) {
     currentTaskName = name;
   }
 
   this.tagEvent = function(tag) {
     tag.addEventListener('click', function(e) {
-      _this.getTask(this)
-      _this.parseTag('.item-task', this)
+      if(_this.getStarted()) return;
+      _this.getTask(this);
+      _this.parseTag('.item-task', this);
     })
   }
   /**
@@ -88,10 +90,16 @@ function Pomodoro(formName, block) {
     localStorage.setItem('pomodoroApp', JSON.stringify(tasks));
   }
 
+  var _this = this
   this.removeTasksStorage = function() {
     localStorage.removeItem('pomodoroApp');
+    tasks = [];
   }
 
+  document.querySelector('.btn-trash').onclick = function(){
+    _this.removeTasksStorage();
+    _this.ul.innerHTML=""
+  }
   /**
   *
   **/
@@ -231,7 +239,6 @@ Pomodoro.prototype.start = function() {
   if (!this.getStarted()) {
     this.setStarted(true);
   }
-
   this.timer();
 }
 

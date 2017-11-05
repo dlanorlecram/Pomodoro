@@ -25,6 +25,7 @@ header {
   position: absolute;
   top: 55%;
   left: 50%;
+  width: 100%;
   max-width: 430px;
   transform: translate(-50%, -50%);
 }
@@ -44,6 +45,7 @@ header {
 
 .display-timer > span{
   font-size: 144px;
+  cursor: default;
 }
 
 .show-timer--minute,
@@ -86,6 +88,9 @@ header {
   margin: 26px 0 0;
   font-size: 13px;
   font-weight: bold;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .small-wrapper > div {
@@ -146,3 +151,13 @@ header {
 .item-task:hover > span{
   color: #4A4A4A;
 }
+
+.btn-trash {
+  border: none;
+  padding: 0;
+  margin: 0;
+  vertical-align: middle;
+  background-color: transparent;
+}
+
+.btn-trash:focus { background-color: transparent }

@@ -3,3 +3,4 @@ $(document).ready(function() {
  });
 
 var appPomodoro = new Pomodoro('set_task', '#task_group');
+console.log(Object.getOwnPropertyNames(appPomodoro))
