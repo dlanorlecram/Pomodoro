@@ -42,7 +42,7 @@ function Pomodoro(formName, block) {
 
   this.tagEvent = function(tag) {
     tag.addEventListener('click', function(e) {
-      if(_this.getStarted()) return;
+      if(_this.getStarted())return;
       _this.getTask(this);
       _this.parseTag('.item-task', this);
     })
